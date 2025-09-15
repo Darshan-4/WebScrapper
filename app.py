@@ -1,5 +1,11 @@
-import streamlit as st
+# SQLite patch for Streamlit Cloud
+import sys
+import pysqlite3
+sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+
+# Now import CrewAI and other modules
 from crewai import Agent, Task, Crew
+import streamlit as st
 from bs4 import BeautifulSoup
 import requests
 
@@ -67,3 +73,4 @@ if url:
         crew.run()
         st.subheader("Extracted Information")
         st.json(result)
+
